@@ -1,6 +1,4 @@
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -33,65 +31,34 @@ public class Client {
 
             Scanner in = new Scanner(System.in);
 
-            System.out.print("Your action: ");
+            System.out.print("Write your Nickname: ");
             String username = in.next();
             outputStream.writeUTF(username);
 
             System.out.println("Redirecting you to the chat...");
 
 
-            String messageText = "";
-
-            while (!"\\exit".equals(messageText)) {
-                messageText = in.nextLine();
-
-                //message = new Message(messageText, chatID, user);
-
-                try {
-                    outputStream.writeObject(messageText);
-                    outputStream.flush();
-                    //send(message, outputStream);
-                    System.out.println(messageText);
-
-//                    if ("\\settings".equals(messageText)) {
-//                        synchronized (monitor) {
-//                            monitor.setStatus(Status.SETTINGS_ON);
-//                            Thread settingThread = new Thread(settings);
-//                            settingThread.start();
-//                            try {
-//                                settingThread.join();
-//                            } catch (InterruptedException e) {
-//                                System.out.println("An error occurred while getting to the Settings Module");
-//                            }
-//                            monitor.setStatus(Status.SETTINGS_OFF);
-//                            System.out.printf("======== Chat %d ========\n", chatID);
-//                        }
-//                    }
-                } catch (IOException e) {
-                    System.out.println("An error occurred while sending your message. " +
-                            "Please, try to send it again.");
-                }
-            }
-            //paste code here
-
 
             /* part of the settings task */
             //messageSender.setSettings(new Settings(inputStream, outputStream, user));
 
-            //Thread sender = new Thread(messageSender);
-            //Thread receiver = new Thread(messageReceiver);
+            MessageSend ms = new MessageSend(outputStream);
+            MessageReceive mr = new MessageReceive(inputStream);
+            Thread sender = new Thread(ms);
+            Thread receiver = new Thread(mr);
 
             System.out.printf("======== Chat ========\n");
             System.out.println("> type \\settings to change your registration information\n" +
                     "> type \\exit to close the application");
 
-//            sender.start();
-//            receiver.start();
-//
-//            sender.join();
-//            receiver.join();
+            sender.start();
+            receiver.start();
+
+            sender.join();
+            receiver.join();
         } catch (IOException e) {
             System.out.println("An error occurred while communication with Server. Connection is lost");
+        } catch (InterruptedException e) {
         }
     }
 }

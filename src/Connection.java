@@ -50,7 +50,7 @@ public class Connection implements Runnable {
                 outputStream.flush();
                 chat.removeOutputStream(outputStream);
                 chat.removeUser(user);
-                System.out.printf("%s\tUser %s has left the Chat %d\n",
+                System.out.printf("%s\tUser %s has left the Chat %s\n",
                         Thread.currentThread().getName(), user.getNickname());
                 return;
             } else {

@@ -37,6 +37,7 @@ public class Chat {
 
     public void sendMessage(String message, ObjectOutputStream outputStream) {
         ArrayList<ObjectOutputStream> closedStreams = new ArrayList<>();
+        System.out.println(outputStreams.size());
         for (ObjectOutputStream oos : outputStreams) {
             if (oos != outputStream) {
                 try {

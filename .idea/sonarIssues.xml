@@ -23,12 +23,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/MessageReceive.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/MessageSend.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/ServerMain.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/User.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/messageReceive.java">
           <value>
             <set />
           </value>
