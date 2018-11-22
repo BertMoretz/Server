@@ -1,6 +1,4 @@
 import java.io.*;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -22,8 +20,10 @@ public class Connection implements Runnable {
              ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())) {
 
             username = inputStream.readUTF();
+
             System.out.println(username);
-            User user = new User(chat.usersLength() + 1, username);
+
+            User user = new User(chat.isEmpty() ? 1 : chat.usersLength() + 1, username);
 
             chat.addUser(user);
             chat.addOutputStream(outputStream);
@@ -32,7 +32,7 @@ public class Connection implements Runnable {
             processMessage(inputStream, outputStream, user);
 
         } catch (IOException e) {
-            System.out.printf("%s\tConnection was lost. Socket is closed\n",
+            System.out.printf("%s\tConnection was lost.   Socket is closed\n",
                     Thread.currentThread().getName(), username);
         } catch (ClassNotFoundException e) {
             System.out.printf("%s\tAn error occurred while object was read. Class was not found in the packages\n",

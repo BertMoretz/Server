@@ -35,10 +35,7 @@ public class Client {
 
             System.out.print("Your action: ");
             String username = in.next();
-
-            //authorize(inputStream, outputStream);
-            //User user = getUserInfo(inputStream, outputStream);
-            //int chatID = selectChat(inputStream, outputStream);
+            outputStream.writeUTF(username);
 
             System.out.println("Redirecting you to the chat...");
 

@@ -4,8 +4,8 @@ import java.net.ServerSocket;
 import java.util.ArrayList;
 
 public class Chat {
-    private ArrayList<User> users;
-    private ArrayList<ObjectOutputStream> outputStreams;
+    private ArrayList<User> users = new ArrayList<>();
+    private ArrayList<ObjectOutputStream> outputStreams = new ArrayList<>();
 
     public Chat () {
         //Chat created
@@ -29,6 +29,10 @@ public class Chat {
 
     public int usersLength() {
         return users.size();
+    }
+
+    public boolean isEmpty() {
+        return users.isEmpty();
     }
 
     public void sendMessage(String message, ObjectOutputStream outputStream) {
