@@ -18,31 +18,12 @@ public class MessageSend implements Runnable {
         while (!"\\exit".equals(messageText)) {
             messageText = in.nextLine();
 
-            //message = new Message(messageText, chatID, user);
-
             try {
                 outputStream.writeObject(messageText);
                 outputStream.flush();
-                //send(message, outputStream);
-                System.out.println(messageText);
-
-//                    if ("\\settings".equals(messageText)) {
-//                        synchronized (monitor) {
-//                            monitor.setStatus(Status.SETTINGS_ON);
-//                            Thread settingThread = new Thread(settings);
-//                            settingThread.start();
-//                            try {
-//                                settingThread.join();
-//                            } catch (InterruptedException e) {
-//                                System.out.println("An error occurred while getting to the Settings Module");
-//                            }
-//                            monitor.setStatus(Status.SETTINGS_OFF);
-//                            System.out.printf("======== Chat %d ========\n", chatID);
-//                        }
-//                    }
+                //System.out.println(messageText);
             } catch (IOException e) {
-                System.out.println("An error occurred while sending your message. " +
-                        "Please, try to send it again.");
+                System.out.println("Cannot send the message. Please, try again.");
             }
         }
     }

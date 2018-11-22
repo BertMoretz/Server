@@ -32,7 +32,7 @@ public class Connection implements Runnable {
             processMessage(inputStream, outputStream, user);
 
         } catch (IOException e) {
-            System.out.printf("%s\tConnection was lost.   Socket is closed\n",
+            System.out.printf("%s\tConnection with %s was lost.   Socket is closed\n",
                     Thread.currentThread().getName(), username);
         } catch (ClassNotFoundException e) {
             System.out.printf("%s\tAn error occurred while object was read. Class was not found in the packages\n",
@@ -50,7 +50,7 @@ public class Connection implements Runnable {
                 outputStream.flush();
                 chat.removeOutputStream(outputStream);
                 chat.removeUser(user);
-                System.out.printf("%s\tUser %s has left the Chat %s\n",
+                System.out.printf("%s\tUser %s has left the Chat \n",
                         Thread.currentThread().getName(), user.getNickname());
                 return;
             } else {
@@ -58,9 +58,6 @@ public class Connection implements Runnable {
                         Thread.currentThread().getName(), user.getNickname(), message);
 
                 chat.sendMessage(message, outputStream);
-
-                System.out.printf("%s\tSent to The Chat!\n",
-                        Thread.currentThread().getName());
             }
         }
     }

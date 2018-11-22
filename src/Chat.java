@@ -37,11 +37,12 @@ public class Chat {
 
     public void sendMessage(String message, ObjectOutputStream outputStream) {
         ArrayList<ObjectOutputStream> closedStreams = new ArrayList<>();
-        System.out.println(outputStreams.size());
+
+        String senderName = users.get(outputStreams.indexOf(outputStream)).getNickname();
         for (ObjectOutputStream oos : outputStreams) {
             if (oos != outputStream) {
                 try {
-                    oos.writeObject(message);
+                    oos.writeUTF(senderName + ":\t" + message);
                     oos.flush();
                 } catch (IOException e) {
                     // Socket was closed for that stream
